@@ -46,13 +46,14 @@ stdenv.mkDerivation rec {
     runHook preBuild
     pnpm build
     pnpm prune --prod --ignore-scripts
+    rm -rf .next/cache
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
     mkdir -p $out/share
-    cp -r -t $out/share .next node_modules dist config package.json
+    cp -r -t $out/share .next node_modules dist config package.json overseerr-api.yml
     runHook postInstall
   '';
 
@@ -60,6 +61,7 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     makeWrapper '${nodejs}/bin/node' "$out/bin/jellyseerr" \
       --add-flags "$out/share/dist/index.js" \
+      --chdir "$out/share" \
       --set NODE_ENV production
   '';
 
