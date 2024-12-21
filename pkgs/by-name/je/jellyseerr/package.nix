@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
     mkdir -p $out/share
-    cp -r -t $out/share .next node_modules dist config package.json overseerr-api.yml
+    cp -r -t $out/share .next node_modules dist public package.json overseerr-api.yml
     runHook postInstall
   '';
 

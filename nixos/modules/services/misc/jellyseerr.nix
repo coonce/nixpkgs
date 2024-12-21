@@ -21,17 +21,10 @@ in
       description = ''The port which the Jellyseerr web UI should listen to.'';
     };
 
-    dataDir = lib.mkOption {
-      type = lib.types.path;
-      default = "/var/lib/jellyseerr";
-      description = "Base data directory";
-    };
-
     configDir = lib.mkOption {
       type = lib.types.path;
-      default = "${cfg.dataDir}/config";
-      defaultText = "\${cfg.dataDir}/config";
-      description = "Directory containing server configuration files.";
+      default = "/var/lib/jellyseerr/config";
+      description = "Config data directory";
     };
   };
 
